@@ -1,3 +1,3 @@
-# Machine Learning Specialization (DeepLearning.AI)
+# Machine Learning Specialization 
 
-This repository contains my notes, practice code, and projects from the [Machine Learning Specialization](https://www.coursera.org/specializations/machine-learning-introduction) by DeepLearning.AI (Andrew Ng).
+A collection of notes, Python practice, and ML experiments/projects as I learn Machine Learning step by step.  
