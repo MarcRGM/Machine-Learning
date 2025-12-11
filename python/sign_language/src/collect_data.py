@@ -16,5 +16,49 @@ hands = mp_hands.Hands(
 cap = cv2.VideoCapture(0) # open camera index 0 (Main camera)
 # cap read frames from camera
 
+# Runs every frame
+while True:
+    success, frame = cap.read() # Tries to read one frame from the webcam
+    # success is True if it got a frame, False if it failed
+    # frame is a NumPy array representing the image
+    if not success:
+        break
+    
+    # Convert BGR (OpenCV) to RGB (MediaPipe)
+    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) 
+    # OpenCV frames are in BGR (blue, green, red) order
+    # MediaPipe expects RGB (red, green, blue)
+    # cv2.cvtColor converts the frame from BGR to RGB and stores it in rgb
 
+    result = hands.process(rgb) # passes the image to the MediaPipe model
+    # It returns a result object like:
+    # result.multi_hand_landmarks – list of detected hands, each with 21 landmarks
 
+    if result.multi_hand_landmarks: # If this is not empty, then at least one hand was detected
+        for hand_landmarks in result.multi_hand_landmarks: # Loop over each detected hand
+            # hand_landmarks is a structure with 21 points
+            mp_drawing.draw_landmarks( # Drawing landmarks on the video
+                frame, # what to draw on
+                hand_landmarks, # which landmarks to draw
+                mp_hands.HAND_CONNECTIONS # how the points are connected
+            )
+
+            # hand_landmarks.landmark is a list of 21 landmarks
+            # landmark[0] is the wrist point by MediaPipe’s definition
+            # Example: print landmark[0] (wrist) coordinates
+            wrist = hand_landmarks.landmark[0]
+            print(f"Wrist: x={wrist.x:.3f}, y={wrist.y:.3f}, z={wrist.z:.3f}")
+    
+    # Shows the current frame in a window named "Collect Data - Press q to quit"
+    cv2.imshow("Collect Data - Press q to quit", frame)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+    # cv2.waitKey(1) waits 1 millisecond for a key press
+    # & 0xFF is a common OpenCV pattern to get the key code
+    # ord('q') is the keycode for the letter q
+    # Pressing q will break the loop and the program goes to cleanup
+
+cap.release() # closes the webcam
+cv2.destroyAllWindows() # closes all OpenCV windows
+hands.close() # releases resources used by MediaPipe
