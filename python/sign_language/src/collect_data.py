@@ -72,24 +72,63 @@ while True:
 
     
     # Shows the current frame in a window named "Collect Data - Press q to quit"
-    cv2.imshow("Collect Data - Press q to quit", frame)
+    cv2.imshow("Collect Data - Press ESC to quit", frame)
 
     key = cv2.waitKey(1) & 0xFF
     # cv2.waitKey(1) waits 1 millisecond for a key press
     # & 0xFF is a common OpenCV pattern to get the key code
 
-    if key == ord('q'):
+    # Used for looping the keys
+    label_map = {
+        ord('a'): "A",
+        ord('b'): "B",
+        ord('c'): "C",
+        ord('d'): "D",
+        ord('e'): "E",
+        ord('f'): "F",
+        ord('g'): "G",
+        ord('h'): "H",
+        ord('i'): "I",
+        ord('j'): "J",
+        ord('k'): "K",
+        ord('l'): "L",
+        ord('m'): "M",
+        ord('n'): "N",
+        ord('o'): "O",
+        ord('p'): "P",
+        ord('q'): "Q",
+        ord('r'): "R",
+        ord('s'): "S",
+        ord('t'): "T",
+        ord('u'): "U",
+        ord('v'): "V",
+        ord('w'): "W",
+        ord('x'): "X",
+        ord('y'): "Y",
+        ord('z'): "Z",
+        ord('0'): "0",
+        ord('1'): "1",
+        ord('2'): "2",
+        ord('3'): "3",
+        ord('4'): "4",
+        ord('5'): "5",
+        ord('6'): "6",
+        ord('7'): "7",
+        ord('8'): "8",
+        ord('9'): "9"
+    }
+
+    if key == 27:
         break
-    # ord('q') is the keycode for the letter q
-    # Pressing q will break the loop and the program goes to cleanup
-
-    elif key == ord('a'):
-         if len(points) == 63: # Make sure a valid hand vector with 63 values is detected
-            save_sample("A", points)
-            # Call the save_sample function 
-            # and saves the current 63 values plus the label "A" as one row
-            print("Saved one 'A' sample") 
-
+    # 27 is the keycode for the ESC key
+    # Pressing ESC will break the loop and the program goes to cleanup
+    elif key in label_map and len(points) == 63: 
+        # Checks if a known key is pressed and makes sure a valid hand vector with 63 values is detected
+        label = label_map[key] # extracts the pressed key
+        save_sample(label, points)
+        # Call the save_sample function 
+        # and saves the current 63 values plus the label of the Key
+        print(f"Saved one '{label}' sample")
     else:
         print("No valid hand data to save")
     # This is for capturing the points for 'A'
