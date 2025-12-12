@@ -53,7 +53,7 @@ while True:
                 points.append(lm.z)
 
             print("Number of values:", len(points)) 
-            # 21 landmarks * 3 coordinates each = 61 values
+            # 21 landmarks * 3 coordinates each = 63 values
 
     
     # Shows the current frame in a window named "Collect Data - Press q to quit"
