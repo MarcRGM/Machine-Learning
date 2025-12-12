@@ -59,12 +59,22 @@ while True:
     # Shows the current frame in a window named "Collect Data - Press q to quit"
     cv2.imshow("Collect Data - Press q to quit", frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+    key = cv2.waitKey(1) & 0xFF
     # cv2.waitKey(1) waits 1 millisecond for a key press
     # & 0xFF is a common OpenCV pattern to get the key code
+
+    if key == ord('q'):
+        break
     # ord('q') is the keycode for the letter q
     # Pressing q will break the loop and the program goes to cleanup
+
+    elif key == ord('a'):
+        print("Captured an 'A' sample with 63 values")
+    else:
+        print("No valid hand data to save")
+    # This is for capturing the points 
+    
+    
 
 cap.release() # closes the webcam
 cv2.destroyAllWindows() # closes all OpenCV windows
