@@ -44,10 +44,17 @@ while True:
             )
 
             # hand_landmarks.landmark is a list of 21 landmarks
-            # landmark[0] is the wrist point by MediaPipe’s definition
-            # Example: print landmark[0] (wrist) coordinates
-            wrist = hand_landmarks.landmark[0]
-            print(f"Wrist: x={wrist.x:.3f}, y={wrist.y:.3f}, z={wrist.z:.3f}")
+            # each landmark contains x, y, and z coordinates
+            # Example: 
+            points = []
+            for lm in hand_landmarks.landmark:
+                points.append(lm.x)
+                points.append(lm.y)
+                points.append(lm.z)
+
+            print("Number of values:", len(points)) 
+            # 21 landmarks * 3 coordinates each = 61 values
+
     
     # Shows the current frame in a window named "Collect Data - Press q to quit"
     cv2.imshow("Collect Data - Press q to quit", frame)
