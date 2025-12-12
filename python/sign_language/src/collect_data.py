@@ -1,5 +1,6 @@
 import cv2 # webcam
 import mediapipe as mp # Detects hand and gives it Landmark
+import csv # writes to a .csv file
 
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
@@ -7,7 +8,7 @@ mp_drawing = mp.solutions.drawing_utils
 # Hand detection
 hands = mp_hands.Hands(
     static_image_mode=False, # Track hands across frames
-    max_num_hands=2, # detects 1 hand
+    max_num_hands=2, # detects 2 hand
     min_detection_confidence=0.5, # 50% hand detection
     min_tracking_confidence=0.5 # 50% tracking between frames
 )
@@ -15,6 +16,20 @@ hands = mp_hands.Hands(
 # Opens the webcam
 cap = cv2.VideoCapture(0) # open camera index 0 (Main camera)
 # cap read frames from camera
+
+def save_sample(label, points, filename="data/sign_data.csv"): 
+    row = points + [label] # Row to save the points and the label
+    with open(filename, mode="a", newline="") as csv_file:
+        # Opens the file "data/sign_data.csv" in append mode
+        # Gives the opened file object a variable name: csv_file
+        writer = csv.writer(csv_file) # creates a writer for the file
+        writer.writerow(row) # writes one row into the file
+# Defines a function named save_sample
+# It takes:
+# label: "A", "B", etc
+# points: list of 63 values
+# 63 values describing the hand pose (21 landmarks * 3 coordinates each landmark)
+# filename: where to save 
 
 # Runs every frame
 while True:
@@ -69,10 +84,15 @@ while True:
     # Pressing q will break the loop and the program goes to cleanup
 
     elif key == ord('a'):
-        print("Captured an 'A' sample with 63 values")
+         if len(points) == 63: # Make sure a valid hand vector with 63 values is detected
+            save_sample("A", points)
+            # Call the save_sample function 
+            # and saves the current 63 values plus the label "A" as one row
+            print("Saved one 'A' sample") 
+
     else:
         print("No valid hand data to save")
-    # This is for capturing the points 
+    # This is for capturing the points for 'A'
     
     
 
