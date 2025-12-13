@@ -49,6 +49,7 @@ while True:
     # It returns a result object like:
     # result.multi_hand_landmarks – list of detected hands, each with 21 landmarks
 
+    points = [] # Always start empty each frame
     if result.multi_hand_landmarks: # If this is not empty, then at least one hand was detected
         for hand_landmarks in result.multi_hand_landmarks: # Loop over each detected hand
             # hand_landmarks is a structure with 21 points
@@ -61,7 +62,6 @@ while True:
             # hand_landmarks.landmark is a list of 21 landmarks
             # each landmark contains x, y, and z coordinates
             # Example: 
-            points = []
             for lm in hand_landmarks.landmark:
                 points.append(lm.x)
                 points.append(lm.y)
@@ -131,7 +131,6 @@ while True:
         print(f"Saved one '{label}' sample")
     else:
         print("No valid hand data to save")
-    # This is for capturing the points for 'A'
     
     
 
