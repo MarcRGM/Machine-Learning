@@ -8,7 +8,7 @@ mp_drawing = mp.solutions.drawing_utils
 # Hand detection
 hands = mp_hands.Hands(
     static_image_mode=False, # Track hands across frames
-    max_num_hands=2, # detects 2 hand
+    max_num_hands=1, # detects 1 hand
     min_detection_confidence=0.5, # 50% hand detection
     min_tracking_confidence=0.5 # 50% tracking between frames
 )
