@@ -1,6 +1,6 @@
 # ML Micro-Projects
 
-A collection of Python tools for data analysis, numerical computing, and machine learning workflows.
+This repository showcases a collection of **Python projects** leveraging fundamental libraries for **data science**.
 
 ## Projects
 
