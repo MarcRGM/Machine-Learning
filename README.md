@@ -1,4 +1,4 @@
-# ML Micro-Projects
+# Data Science Micro-Projects
 
 This repository showcases a collection of **Python projects** leveraging fundamental libraries for **data science**.
 
