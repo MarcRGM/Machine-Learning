@@ -12,8 +12,10 @@ house_sizes = np.random.uniform(30.0, 200.0, 50).reshape(-1, 1)
 # np.random.uniform() - low (inclusive), high (exclusive), count
 # .reshape(-1, 1) - scikit‑learn requires features to be 2D
 # -1 to automatically adjust based on how many values the array contains
+# in this context it means "figure out the number of rows"
 noise = np.random.normal(0, 20000, 50) # mean, std, count
 price = house_sizes * 1500 + 20000 + noise
+
 
 
 
