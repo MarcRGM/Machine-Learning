@@ -7,7 +7,7 @@ b = np.array([[1, 2], [3, 4]]) # 2D array (matrix)
 np.zeros((3, 4)) # 3×4 matrix of zeros 
 np.ones((2, 3)) # 2×3 matrix of ones 
 np.eye(3) # 3×3 identity matrix
-np.arange(0, 10, 2) # (Start: Inclusive, End: Exclusive, Steps) = [0, 2, 4, 6, 8]
+np.arange(0, 10, 2) # (Start: Inclusive, Stop: Exclusive, Steps) = [0, 2, 4, 6, 8]
 np.linspace(0, 1, 5) # (Start: Inclusive, End: Inclusive, N) = [0., 0.25, 0.5, 0.75, 1.] - N evenly-spaced points
 
 # Random arrays
